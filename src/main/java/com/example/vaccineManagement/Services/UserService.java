@@ -35,7 +35,7 @@ public class UserService {
        return "Email has been modified.";
     }
 
-    public User getByEmail(String email)
+    public User getUserByEmail(String email)
     {
         User user=userRepository.findByEmailId(email);
         return user;

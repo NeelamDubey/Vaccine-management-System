@@ -19,7 +19,7 @@ public class DoctorController {
     public String addDoc(@RequestBody Doctor doctor)
     {
         try{
-            String response=doctorService.addDoc(doctor);
+            String response=doctorService.addDoctor(doctor);
             return response;
 
         }catch(Exception e)
