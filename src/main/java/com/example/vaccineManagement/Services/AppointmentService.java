@@ -34,14 +34,14 @@ public class AppointmentService {
     @Autowired
     private JavaMailSender emailSender;
 
-    public String bookAppointment(AppointmentReqDto appointmentReqDto)throws DoctorNotFound, UserNotFound {
+    public String bookAppointment(AppointmentReqDto appointmentReqDto) throws DoctorNotFound, UserNotFound {
 
         Optional<Doctor> doctorOptional = doctorRepository.findById(appointmentReqDto.getDocId()); //null/0
-        if(!doctorOptional.isPresent()){
+        if (!doctorOptional.isPresent()) {
             throw new DoctorNotFound("DoctorId not found");
         }
         Optional<User> userOptional = userRepository.findById(appointmentReqDto.getUserId());
-        if(!userOptional.isPresent()){
+        if (!userOptional.isPresent()) {
             throw new UserNotFound("UserId not found");
         }
         Doctor doctor = doctorOptional.get();
@@ -67,10 +67,10 @@ public class AppointmentService {
 
         //Send an email to the sender
 
-        String body = " Hi ! "+user.getName()+"\n" +
-                "You have successfully booked an appointment on "+appointment.getAppointmentDate() + "at "+appointment.getAppointmentTime()+"\n"+
-                "You doctor is "+doctor.getName()+ "\n"+
-                "Please reach at "+doctor.getVaccinationCenter().getAddress()+"\n"
+        String body = " Hi ! " + user.getName() + "\n" +
+                "You have successfully booked an appointment on " + appointment.getAppointmentDate() + "at " + appointment.getAppointmentTime() + "\n" +
+                "You doctor is " + doctor.getName() + "\n" +
+                "Please reach at " + doctor.getVaccinationCenter().getAddress() + "\n"
                 + "Mask is mandatory";
 
 
@@ -82,16 +82,8 @@ public class AppointmentService {
         mailMessage.setText(body);
 
         emailSender.send(mailMessage);
-
-
-        String enteredString;
-
-        if(enteredString.equals(Gender.FEMALE)|| enteredString.equals(Gender.MALE))
-
-
-
-            return "Appointment booked successfully";
+        return "Appointment booked successfully";
 
     }
-
 }
+
